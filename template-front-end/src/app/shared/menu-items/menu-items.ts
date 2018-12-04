@@ -30,6 +30,33 @@ export interface Menu {
 }
 
 const MENUITEMS = [
+    {
+        label: 'Profile',
+        main: [
+            {
+                state: 'profile',
+                name: 'Mon Profile',
+                type: 'link',
+                icon: 'ti-user'
+            },
+
+        ]
+    },  {
+        label: 'TRAJETS',
+        main: [
+            {
+                state: 'mestrajet',
+                name: 'Mes Trjaets',
+                type: 'link',
+                icon: 'ti-map-alt'
+            },{
+                state: 'trajet',
+                name: 'All Trajets',
+                type: 'link',
+                icon: 'ti-location-pin'
+            },
+        ]
+    },
   {
     label: 'Layout',
     main: [

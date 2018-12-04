@@ -8,6 +8,7 @@ export interface Options {
   heading?: string;
   removeFooter?: boolean;
   mapHeader?: boolean;
+
 }
 
 @Component({
@@ -44,6 +45,10 @@ export class AdminLayoutComponent implements OnInit {
   isCollapsedSideBar = 'no-block';
   toggleOn = true;
   windowWidth: number;
+  nom:any;
+  prenom:any;
+  adresse:any;
+  email:any;
 
   public htmlButton: string;
 
@@ -60,7 +65,18 @@ export class AdminLayoutComponent implements OnInit {
 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+      this.UserSession();
+  }
+
+    UserSession() {
+
+        this.nom = sessionStorage.getItem('nom');
+        this.prenom = sessionStorage.getItem('prenom');
+        this.adresse = sessionStorage.getItem('adresse');
+        this.email = sessionStorage.getItem('email');
+    }
 
   onClickedOutside(e: Event) {
       if (this.windowWidth < 768 && this.toggleOn && this.verticalNavType !== 'offcanvas') {

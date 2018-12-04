@@ -17,7 +17,7 @@
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
     "@angular/core": "^4.2.4",
-    "@angular/forms": "^4.2.4",
+    "@angular/forms": "^4.4.7",
     "@angular/http": "^4.2.4",
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
@@ -38,6 +38,7 @@
     "ngx-chips": "^1.5.3",
     "raphael": "^2.2.7",
     "rxjs": "^5.4.2",
+    "rxjs-operators": "^1.0.7",
     "screenfull": "^3.3.1",
     "ti-icons": "^0.1.2",
     "zone.js": "^0.8.14"

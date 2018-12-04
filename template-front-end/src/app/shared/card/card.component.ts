@@ -19,7 +19,12 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
+
+
+
+
 
   toggleCard() {
     this.cardToggle = this.cardToggle === 'collapsed' ? 'expanded' : 'collapsed';

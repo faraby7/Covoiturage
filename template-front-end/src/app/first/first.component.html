@@ -5,7 +5,7 @@
       <div class="col-sm-12">
         <!-- Authentication card start -->
         <div class="login-card card-body auth-body">
-          <form class="md-float-material">
+          <form method="post" action="" class="md-float-material" (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="text-center">
               <img src="assets/images/auth/logo.png" alt="logo.png">
             </div>
@@ -20,11 +20,11 @@
               </div>
               <p class="text-inverse b-b-default text-left p-b-5">Sign in with your regular account</p>
               <div class="input-group">
-                <input type="email" class="form-control" placeholder="Username">
+                <input type="text" class="form-control" placeholder="Adresse email" name="email" id="email" ngModel>
                 <span class="md-line"></span>
               </div>
               <div class="input-group">
-                <input type="password" class="form-control" placeholder="password">
+                <input type="password" class="form-control" placeholder="Mot de passe"  name="password" id="password" ngModel>
                 <span class="md-line"></span>
               </div>
               <div class="row m-t-25 text-left">
@@ -43,7 +43,7 @@
               </div>
               <div class="row m-t-30">
                 <div class="col-md-12">
-                  <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">LOGIN</button>
+                  <input type="submit" value="Connexion" class="btn btn-primary btn-md btn-block waves-e ffect text-center m-b-20">
                 </div>
               </div>
             </div>
@@ -53,3 +53,4 @@
     </div>
   </div>
 </section>
+<ng2-toasty [position]="position"></ng2-toasty>

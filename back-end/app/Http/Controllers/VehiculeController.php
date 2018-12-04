@@ -17,6 +17,12 @@ class VehiculeController extends Controller
         //
     }
 
+
+    public function ConducteurVoiture($idConducteur)
+    {
+        return Vehicule::where('idconducteur', '=', $idConducteur)->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

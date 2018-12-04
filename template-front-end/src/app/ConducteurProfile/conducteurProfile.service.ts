@@ -3,15 +3,16 @@ import {Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {of} from "rxjs/observable/of";
-import { Utilisateur } from "./Utilisateur";
-import {ConducteurProfile} from '../ConducteurProfile/ConducteurProfile';
+import {Trajets} from '../trajet/Trajets';
+import {ConducteurProfile} from './ConducteurProfile';
+
 
 
 
 
 
 @Injectable()
-export class FirstService {
+export class ConducteurProfileService {
 
     private ApiUrl="http://localhost:8000/api";
     private _options: RequestOptions = null;
@@ -30,34 +31,38 @@ export class FirstService {
         return httpOptions;
     }
 
-    Passager(id:number): Observable<Utilisateur[]> {
 
+    getConducteur(id:number): Observable<ConducteurProfile[]> {
         const httpOptions = this.preparHeader();
         const headers = new Headers();
         headers.append('Content-Type', 'application/json; charset=utf-8');
         headers.append('Authorization', 'auth-token');
         this._options = new RequestOptions({headers: headers});
-        return this.http.get<Utilisateur[]>(this.ApiUrl+"/user/passager/"+id,httpOptions);
+        return this.http.get<ConducteurProfile[]>(this.ApiUrl+"/conducteur/"+id,httpOptions);
     }
 
-    Conducteur(id:number): Observable<Utilisateur[]> {
 
+
+    getConducteurTrajet(id:number): Observable<ConducteurProfile[]> {
         const httpOptions = this.preparHeader();
         const headers = new Headers();
         headers.append('Content-Type', 'application/json; charset=utf-8');
         headers.append('Authorization', 'auth-token');
         this._options = new RequestOptions({headers: headers});
-        return this.http.get<Utilisateur[]>(this.ApiUrl+"/user/conducteur/"+id,httpOptions);
+        return this.http.get<ConducteurProfile[]>(this.ApiUrl+"/trajet/conducteur/"+id,httpOptions);
     }
 
 
-    login (utilisateur: Utilisateur): Observable<Utilisateur> {
+
+    getConducteurVehicule(id:number): Observable<ConducteurProfile[]> {
         const httpOptions = this.preparHeader();
         const headers = new Headers();
         headers.append('Content-Type', 'application/json; charset=utf-8');
         headers.append('Authorization', 'auth-token');
         this._options = new RequestOptions({headers: headers});
-        return this.http.post<Utilisateur>(this.ApiUrl+'/user/login', utilisateur,httpOptions);
+        return this.http.get<ConducteurProfile[]>(this.ApiUrl+"/vehicule/conducteur/"+id,httpOptions);
     }
+
+
 
 }

@@ -1,0 +1,91 @@
+<div class="row">
+
+  <div class="col-sm-12">
+    <app-card [title]="'Recherche'" [classHeader]="true">
+      <span class="code-header">All Trajet</span>
+      <table _ngcontent-c6=""  class="table table-hover" >
+        <thead _ngcontent-c6="">
+       <tr>
+
+          <th class="text-center priority-7" style="width: 8%;"> Lieu Depart </th>
+          <th class="text-center priority-9" style="width: 5%;">Lieu Arrive</th>
+          <th class="text-center priority-2" style="width: 5%;"> Date Depart </th>
+          <th class="text-center priority-3" style="width: 5%;"> Date Arrive</th>
+          <th class="text-center priority-3" style="width: 5%;"> Nombre Place</th>
+          <th class="text-center priority-3" style="width: 5%;"> PRIX  </th>
+          <th class="text-center priority-3" style="width: 5%;"> Etat </th>
+        </tr>
+        </thead>
+        <tbody _ngcontent-c6="">
+        <tr *ngFor="let trajet of trajetData" class='table-data'>
+
+            <td (click)="openTrajet(contentTrajetLigne);" style="text-align:center">{{trajet.lieu_depart}}</td>
+            <td (click)="openTrajet(contentTrajetLigne);" style="text-align:center">{{trajet.lieu_arrive}}</td>
+            <td  (click)="openTrajet(contentTrajetLigne);" style="text-align:center">{{trajet.date_depart.slice(0,10)}}</td>
+            <td  (click)="openTrajet(contentTrajetLigne);" style="text-align:center">{{trajet.date_arrive.slice(0,10)}}</td>
+            <td  (click)="openTrajet(contentTrajetLigne);" style="text-align:center">{{trajet.nbplace}}</td>
+            <td (click)="openTrajet(contentTrajetLigne);" style="text-align:center">{{trajet.prix}} MAD</td>
+            <td  (click)="openTrajet(contentTrajetLigne);" style="text-align:center">
+                <div *ngIf="trajet.etats == 0">
+                    <span class="label label-inverse-info">Disponible</span>
+                </div>
+                <div *ngIf="trajet.etats == 1">
+                    <span class="label label-inverse-danger">Non Disponible(Fin)</span>
+                </div>
+            </td>
+
+            <ng-template #contentTrajetLigne let-c="close" let-d="dismiss">
+                <div class="modal-header" style="background-color: #00AEEF">
+                    <h4 class="modal-title" style="color: white">Trajet</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Lieu Depart</dt>
+                        <dd class="col-sm-3"> {{ trajet.lieu_depart }}</dd>
+                        <dt class="col-sm-3">lieu Arrive</dt>
+                        <dd class="col-sm-3"> {{ trajet.lieu_arrive }}</dd>
+                        <br><br>
+                        <dt class="col-sm-3">Date Depart</dt>
+                        <dd class="col-sm-3"> {{ trajet.date_depart.slice(0,10) }}</dd>
+                        <dt class="col-sm-3">Dae arrive</dt>
+                        <dd class="col-sm-3"> {{ trajet.date_arrive.slice(0,10) }}</dd>
+                        <br><br>
+
+                        <dt class="col-sm-3">PRIX</dt>
+                        <dd class="col-sm-3">
+                            <div *ngIf="trajet.prix == null">
+                                <span class="label label-inverse-danger">Pas Montant </span>
+                            </div>
+                            {{ trajet.prix }}</dd>
+                        <br><br>
+                        <dt class="col-sm-3">Etat</dt>
+                        <dd class="col-sm-3">
+                        <div *ngIf="trajet.nbplace > 2">
+                            <span class="label label-inverse-info">Disponible</span>
+                        </div>
+                        <div *ngIf="trajet.nbplace <= 2">
+                            <span class="label label-inverse-danger">Non Disponible</span>
+                        </div>
+                        </dd>
+                    </dl>
+
+                </div>
+
+            </ng-template>
+
+
+        </tr>
+
+        </tbody>
+      </table>
+    </app-card>
+  </div>
+
+
+</div>
+
+
+<ng2-toasty [position]="position"></ng2-toasty>

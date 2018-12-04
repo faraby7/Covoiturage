@@ -11,7 +11,10 @@ class Reservation extends Model
         'idreservation',
         'date_reservation',
         'id_trajet',
-        'id_passager'
+        'id_passager',
+        'description_reservation',
+        'acceptation',
+
 
     ];
 }

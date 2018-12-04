@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 21 nov. 2018 à 23:45
+-- Généré le :  Dim 02 déc. 2018 à 12:56
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  7.2.1
 
@@ -41,27 +41,15 @@ CREATE TABLE `conducteurs` (
 --
 
 INSERT INTO `conducteurs` (`id`, `id_utilisateur`, `nb_etoils`, `updated_at`, `created_at`) VALUES
-(1, 1, 0, NULL, NULL),
-(2, 5, 0, NULL, NULL),
-(3, 12, 0, NULL, NULL),
-(4, 13, 0, NULL, NULL),
-(5, 14, 0, NULL, NULL),
-(6, 15, 0, NULL, NULL),
-(7, 16, 0, NULL, NULL),
-(8, 18, 0, NULL, NULL),
-(9, 21, 0, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(1, 1, 4, NULL, NULL),
+(2, 5, 1, NULL, NULL),
+(3, 12, 4, NULL, NULL),
+(4, 13, 4, NULL, NULL),
+(5, 14, 5, NULL, NULL),
+(6, 15, 2, NULL, NULL),
+(7, 16, 3, NULL, NULL),
+(8, 18, 3, NULL, NULL),
+(9, 21, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -124,6 +112,8 @@ CREATE TABLE `reservations` (
   `date_reservation` varchar(30) NOT NULL,
   `id_trajet` int(11) DEFAULT NULL,
   `id_passager` int(11) DEFAULT NULL,
+  `description_reservation` varchar(300) DEFAULT NULL,
+  `acceptation` int(11) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -132,20 +122,21 @@ CREATE TABLE `reservations` (
 -- Déchargement des données de la table `reservations`
 --
 
-INSERT INTO `reservations` (`idreservation`, `date_reservation`, `id_trajet`, `id_passager`, `updated_at`, `created_at`) VALUES
-(2, '2018-01-28 02:13:33', 3, 1, NULL, NULL),
-(3, '2018-01-28 03:01:25', 1, 1, NULL, NULL),
-(4, '2018-01-28 12:49:01', 1, 2, NULL, NULL),
-(7, '2018-01-28 17:09:19', 8, 1, NULL, NULL),
-(8, '2018-01-28 17:09:32', 8, 2, NULL, NULL),
-(9, '2018-01-28 17:09:42', 8, 3, NULL, NULL),
-(10, '2018-01-29', 1, 3, NULL, NULL),
-(11, '2018-01-30', 3, 3, NULL, NULL),
-(12, '2018-02-08', 8, 3, NULL, NULL),
-(13, '2018-02-08', 10, 3, NULL, NULL),
-(14, '2018-11-13', 4, 10, NULL, NULL),
-(15, '2018-11-13', 1, 10, NULL, NULL),
-(16, '2018-11-13', 11, 10, NULL, NULL);
+INSERT INTO `reservations` (`idreservation`, `date_reservation`, `id_trajet`, `id_passager`, `description_reservation`, `acceptation`, `updated_at`, `created_at`) VALUES
+(2, '2018-01-28 02:13:33', 3, 1, NULL, NULL, NULL, NULL),
+(3, '2018-01-28 03:01:25', 1, 1, NULL, NULL, NULL, NULL),
+(4, '2018-01-28 12:49:01', 1, 2, 'a', 0, NULL, NULL),
+(7, '2018-01-28 17:09:19', 8, 1, 'a', NULL, NULL, NULL),
+(8, '2018-01-28 17:09:32', 8, 2, 'b', 2, NULL, NULL),
+(9, '2018-01-28 17:09:42', 8, 3, NULL, NULL, NULL, NULL),
+(10, '2018-01-29', 1, 3, NULL, NULL, NULL, NULL),
+(11, '2018-01-30', 3, 3, NULL, NULL, NULL, NULL),
+(12, '2018-02-08', 8, 3, NULL, NULL, NULL, NULL),
+(13, '2018-02-08', 10, 3, NULL, NULL, NULL, NULL),
+(14, '2018-11-13', 4, 10, NULL, NULL, NULL, NULL),
+(15, '2018-11-13', 1, 10, NULL, NULL, NULL, NULL),
+(16, '2018-11-13', 11, 10, NULL, NULL, NULL, NULL),
+(17, '12/12/2012', 20, 2, 'ewqeqweqweqweqweqweq', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -155,13 +146,15 @@ INSERT INTO `reservations` (`idreservation`, `date_reservation`, `id_trajet`, `i
 
 CREATE TABLE `trajets` (
   `id` int(11) NOT NULL,
-  `date_depart` datetime NOT NULL,
-  `date_arrive` datetime NOT NULL,
-  `lieu_depart` varchar(75) NOT NULL,
-  `lieu_arrive` varchar(75) NOT NULL,
-  `prix` decimal(6,2) NOT NULL,
+  `date_depart` datetime DEFAULT NULL,
+  `date_arrive` datetime DEFAULT NULL,
+  `lieu_depart` varchar(75) DEFAULT NULL,
+  `lieu_arrive` varchar(75) DEFAULT NULL,
+  `prix` decimal(6,2) DEFAULT NULL,
   `id_conducteur` int(11) DEFAULT NULL,
-  `nbplace` int(2) NOT NULL DEFAULT '4',
+  `nbplace` int(2) DEFAULT '4',
+  `etats` int(11) DEFAULT NULL,
+  `description` text,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -170,31 +163,19 @@ CREATE TABLE `trajets` (
 -- Déchargement des données de la table `trajets`
 --
 
-INSERT INTO `trajets` (`id`, `date_depart`, `date_arrive`, `lieu_depart`, `lieu_arrive`, `prix`, `id_conducteur`, `nbplace`, `updated_at`, `created_at`) VALUES
-(1, '2018-12-02 00:00:00', '2018-12-02 00:00:00', 'Rabat al irfan', 'Marrakech Rue Mohammed V', '200.00', 1, 2, NULL, NULL),
-(3, '2018-12-01 00:00:00', '2018-12-01 00:00:00', 'Casablanca sidi maarouf rue zaytona', 'Fes Rue Moulay driss', '110.00', 1, 3, NULL, NULL),
-(4, '2018-05-12 00:00:00', '2018-07-12 00:00:00', 'Casablanca Enseme trik el jadida', 'Tetouan nassim rue 44', '75.80', 1, 2, NULL, NULL),
-(6, '2018-05-05 00:00:00', '2018-06-05 00:00:00', 'Quartier mamouni sidi moumen Casablanca', 'Quartier gauchier Agadir', '190.00', 2, 5, NULL, NULL),
-(8, '2018-05-02 00:00:00', '2018-06-02 00:00:00', 'Casablanca sidi maarouf rue zaytona', 'sidi kasem 7ay ridouane', '79.00', 5, 3, NULL, NULL),
-(9, '2018-05-22 00:00:00', '2018-05-23 00:00:00', 'Tanger Rue mosaada', 'Marrakech hay nakhil', '140.50', 6, 4, NULL, NULL),
-(10, '2018-03-12 00:00:00', '2018-03-12 00:00:00', 'Casablanca maarif rue nassim', 'Fes hay al kholoud', '111.50', 7, 3, NULL, NULL),
-(11, '2019-01-01 00:00:00', '2019-05-05 00:00:00', 'Casablanca', 'Rabat', '35.00', 9, 4, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `trajets` (`id`, `date_depart`, `date_arrive`, `lieu_depart`, `lieu_arrive`, `prix`, `id_conducteur`, `nbplace`, `etats`, `description`, `updated_at`, `created_at`) VALUES
+(1, '2018-12-02 00:00:00', '2018-12-02 00:00:00', 'Rabat', 'Marrakech', '200.00', 1, 2, 1, NULL, NULL, NULL),
+(3, '2018-12-01 00:00:00', '2018-12-01 00:00:00', 'Casablanca', 'Fes', '110.00', 1, 3, 1, NULL, NULL, NULL),
+(4, '2018-05-12 00:00:00', '2018-07-12 00:00:00', 'Casablanca', 'Tetouan', '75.80', 1, 2, 1, NULL, NULL, NULL),
+(6, '2018-05-05 00:00:00', '2018-06-05 00:00:00', 'Casablanca', 'Agadir', '190.00', 2, 5, 1, NULL, NULL, NULL),
+(8, '2018-05-02 00:00:00', '2018-06-02 00:00:00', 'Casablanca', 'sidi kasem', '79.00', 5, 3, 1, NULL, NULL, NULL),
+(9, '2018-05-22 00:00:00', '2018-05-23 00:00:00', 'Tanger', 'Marrakech', '140.50', 6, 4, 0, NULL, NULL, NULL),
+(10, '2018-03-12 00:00:00', '2018-03-12 00:00:00', 'Casablanca', 'Fes', '111.50', 7, 3, 0, NULL, NULL, NULL),
+(11, '2019-01-01 00:00:00', '2019-05-05 00:00:00', 'Casablanca', 'Rabat', '35.00', 9, 4, 1, NULL, NULL, NULL),
+(13, '2222-02-22 00:00:00', '2222-02-22 00:00:00', 'Rabat', 'Casabalanca', '222.00', 2, 2, 1, '2222 22  2 2 2 2', '2018-11-26 21:40:45', '2018-11-26 21:40:45'),
+(18, '2018-11-29 00:00:00', '2018-11-22 00:00:00', 'CasaBlanca', 'Rabat', '12.00', 2, 12, 1, 'VlaVlaVlaVlaVlaVla  VlaVla', '2018-11-26 23:47:37', '2018-11-26 23:47:37'),
+(19, '2018-11-15 00:00:00', '2018-11-07 00:00:00', 'Casablanca', 'Rabat', '100.00', 1, 2, 0, 'ewqe', '2018-11-28 23:09:51', '2018-11-28 23:09:51'),
+(20, '2018-12-01 00:00:00', '2018-12-05 00:00:00', 'Tanger', 'Casablanca', '200.00', 1, 2, 0, 'A 2:00', '2018-12-01 13:44:41', '2018-12-01 13:44:41');
 
 -- --------------------------------------------------------
 
@@ -262,6 +243,16 @@ CREATE TABLE `vehicules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Déchargement des données de la table `vehicules`
+--
+
+INSERT INTO `vehicules` (`id`, `coleur`, `nb_places`, `puissance`, `idconducteur`, `updated_at`, `created_at`) VALUES
+(1, 'Mercedec Red', 4, '100.00', 1, NULL, NULL),
+(2, 'Honda Bleu 2019', 4, '200.00', 1, NULL, NULL),
+(3, 'Mercedec Red', 4, '100.00', 2, NULL, NULL),
+(4, 'Honda Bleu 2019', 4, '200.00', 3, NULL, NULL);
+
+--
 -- Index pour les tables déchargées
 --
 
@@ -272,12 +263,6 @@ ALTER TABLE `conducteurs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `idconducteur_UNIQUE` (`id`),
   ADD KEY `fk_cond_ut_idx` (`id_utilisateur`);
-
---
--- Index pour la table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `notes`
@@ -310,12 +295,6 @@ ALTER TABLE `trajets`
   ADD KEY `fk_trajet_cond_idx` (`id_conducteur`);
 
 --
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
@@ -340,12 +319,6 @@ ALTER TABLE `conducteurs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT pour la table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `passagers`
 --
 ALTER TABLE `passagers`
@@ -355,31 +328,25 @@ ALTER TABLE `passagers`
 -- AUTO_INCREMENT pour la table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `idreservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idreservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `trajets`
 --
 ALTER TABLE `trajets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `vehicules`
 --
 ALTER TABLE `vehicules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées

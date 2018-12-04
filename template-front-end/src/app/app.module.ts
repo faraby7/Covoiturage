@@ -14,6 +14,9 @@ import { BreadcrumbsComponent } from './layouts/admin/breadcrumbs/breadcrumbs.co
 import { TitleComponent } from './layouts/admin/title/title.component';
 import {ScrollModule} from './scroll/scroll.module';
 import {LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {AdvanceComponent} from './components/advance/advance.component';
+import {NotificationsComponent} from './components/advance/notifications/notifications.component';
+import {TrajetComponent} from './trajet/trajet.component';
 
 
 
@@ -22,6 +25,8 @@ import {LocationStrategy, PathLocationStrategy} from '@angular/common';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    AdvanceComponent,
+    NotificationsComponent,
     BreadcrumbsComponent,
     TitleComponent,
 

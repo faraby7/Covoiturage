@@ -10,12 +10,14 @@ class ConducteurController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response conducteur-utilisteur/vehucile/trajet
      */
-    public function index()
+    public function index($idConducteur)
     {
-        //
+        return Conducteur::where('conducteurs.id', '=', $idConducteur)->join('utilisateurs', 'conducteurs.id_utilisateur', '=', 'utilisateurs.id')->select('utilisateurs.*','conducteurs.*')->get();
     }
+
+
 
     /**
      * Show the form for creating a new resource.

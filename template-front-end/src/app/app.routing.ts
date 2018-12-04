@@ -3,7 +3,8 @@ import {Routes} from '@angular/router';
 import {AdminLayoutComponent} from './layouts/admin/admin-layout.component';
 import {AuthLayoutComponent} from './layouts/auth/auth-layout.component';
 
-export const AppRoutes: Routes = [{
+export const AppRoutes: Routes = [
+{
   path: '',
   component: AdminLayoutComponent,
   children: [
@@ -15,6 +16,9 @@ export const AppRoutes: Routes = [{
       path: 'dashboard',
       loadChildren: './dashboard/dashboard.module#DashboardModule'
     }, {
+          path: 'dashboardPassager',
+          loadChildren: './dashboardPassager/dashboard.module#DashboardModule'
+    },{
       path: 'basic',
       loadChildren: './components/basic/basic.module#BasicModule'
     }, {
@@ -30,11 +34,24 @@ export const AppRoutes: Routes = [{
       path: 'map',
       loadChildren: './map/map.module#MapModule',
     }, {
-      path: 'simple-page',
-      loadChildren: './simple-page/simple-page.module#SimplePageModule'
-    }
+          path: 'simple-page',
+          loadChildren: './simple-page/simple-page.module#SimplePageModule'
+      },{
+          path: 'trajet',
+          loadChildren: './trajet/trajet.module#TrajetModule'
+      },{
+          path: 'conducteur/:id',
+          loadChildren: './ConducteurProfile/conducteurProfile.module#ConducteurProfileModule'
+      },{
+          path: 'profile',
+          loadChildren: './MonProfileConducteur/conducteurProfile.module#ConducteurProfileModule'
+      },{
+          path: 'mestrajet',
+          loadChildren: './mes-trajet/trajet.module#TrajetModule'
+      }
+
   ]
-}, {
+},{
   path: '',
   component: AuthLayoutComponent,
   children: [

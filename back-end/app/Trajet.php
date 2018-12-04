@@ -15,7 +15,9 @@ class Trajet extends Model
         'lieu_arrive',
         'prix',
         'id_conducteur',
-        'nbplace'
+        'nbplace',
+        'etats',
+        'description'
     ];
 }
 

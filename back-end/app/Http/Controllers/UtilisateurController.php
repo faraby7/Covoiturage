@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Conducteur;
+use App\Passager;
 use App\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -85,6 +87,46 @@ class UtilisateurController extends Controller
         }else
             return response()->json(['data'=>'error in the update'], 500);
     }
+
+    public function login(Request $request)
+    {
+        $utilisateur =  Utilisateur::where(['email'=> $request->input('email')])->where(['password'=> $request->input('password')])->get();
+
+        if(!empty($utilisateur[0]))
+        {
+            return response()->json($utilisateur, 201);
+        }else
+            return response()->json(['data'=>'error in the login'], 500);
+
+    }
+
+    public function Passager($idUtilisateur)
+    {
+        $passager =  Passager::where('id_utilisateur','=',$idUtilisateur)->get();
+
+        if(!empty($passager[0]))
+        {
+            return response()->json($passager, 201);
+        }else{
+                return response()->json(['data'=>'error in the login'], 500);
+            }
+       }
+
+    public function Conducteur($idUtilisateur)
+    {
+            $conducteur =  Conducteur::where('id_utilisateur','=',$idUtilisateur)->get();
+
+            if(!empty($conducteur[0]))
+            {
+                return response()->json($conducteur, 201);
+
+            }else {
+                return response()->json(['data'=>'error in the login'], 500);
+            }
+
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
